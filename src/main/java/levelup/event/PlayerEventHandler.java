@@ -245,14 +245,17 @@ public final class PlayerEventHandler {
                     LevelUp.incrementOreCounter(event.getHarvester(), blockToCounter.get(state.getBlock()));
                 if (random.nextDouble() <= skill / 200D) {
                     boolean foundBlock = false;
+                    ItemStack newOre = null;
                     for (ItemStack stack : event.getDrops()) {
                         if (stack != null && state.getBlock() == Block.getBlockFromItem(stack.getItem())) {
                             writeNoPlacing(stack);
-                            stack.stackSize += 1;
+                            newOre = stack.copy();
                             foundBlock = true;
                             break;
                         }
                     }
+                    if(newOre != null)
+                        event.getDrops().add(newOre);
                     if (!foundBlock) {
                         Item ID = state.getBlock().getItemDropped(state, random, event.getFortuneLevel());
                         if (ID != null) {

@@ -223,8 +223,8 @@ public final class LevelUp {
     private void initClientProperties() {
         clientProperties = new Property[]{
                 config.get("HUD", "allow HUD", allowHUD, "If anything should be rendered on screen at all.").setRequiresMcRestart(true),
-                config.get("HUD", "render HUD on Top Left", renderTopLeft),
-                config.get("HUD", "render HUD on Exp Bar", renderExpBar),
+                config.get("HUD", "render HUD on Top Left", renderTopLeft, "Should the player class be displayed in the top left corner."),
+                config.get("HUD", "render HUD on Exp Bar", renderExpBar, "Should available skill points be displayed on the experience bar."),
                 config.get("FOV", "speed based", changeFOV, "Should FOV change based on player speed from athletics / sneak skills." )};
         allowHUD = clientProperties[0].getBoolean();
         renderTopLeft = clientProperties[1].getBoolean();
