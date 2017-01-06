@@ -3,6 +3,7 @@ package levelup.event;
 import levelup.gui.GuiClasses;
 import levelup.gui.GuiSkills;
 import levelup.gui.LevelUpHUD;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -25,6 +26,8 @@ public final class SkillKeyHandler {
                 Minecraft.getMinecraft().displayGuiScreen(new GuiSkills());
             } else if (LevelUpHUD.canSelectClass())
                 Minecraft.getMinecraft().displayGuiScreen(new GuiClasses());
+            else
+                Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentTranslation("level.invalid"));
         }
     }
 }

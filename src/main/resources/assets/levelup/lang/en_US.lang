@@ -87,3 +87,5 @@ config.levelup.option2=Render HUD on Exp Bar : %b
 config.levelup.option3=FOV is based on speed : %b
 
 sneak.attack=Sneak attack for %d x damage!
+
+level.invalid=§e§l[Level Up!]§r§e You must reach level 4 before choosing a class.§r
