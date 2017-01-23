@@ -64,7 +64,7 @@ public final class LevelUp {
     private static Map<Object, Integer> towItems;
     private static List[] tiers;
     private static Configuration config;
-    public static boolean allowHUD = true, renderTopLeft = true, renderExpBar = true, changeFOV = true;
+    public static boolean allowHUD = true, renderTopLeft = true, renderExpBar = true, changeFOV = true, oreNoPlace = true;
     private static boolean bonusMiningXP = true, bonusCraftingXP = true, bonusFightingXP = true, oreMiningXP = true;
     public static FMLEventChannel initChannel, skillChannel, classChannel, configChannel;
 
@@ -249,7 +249,8 @@ public final class LevelUp {
                 config.get(cat, "Add XP on Crafting some items", true, "This is a global bonus, limited to a few craftable items"),
                 config.get(cat, "Add XP on Mining some ore", oreMiningXP, "This is a global bonus, limited to a few ores"),
                 config.get(cat, "Add Bonus XP on Fighting", bonusFightingXP, limitedBonus),
-                config.get(cat, "Furnace ejects smelting bonus", LevelUpAPI.furnaceEjection, "Disabling this will cause doubled furnace items to be added to the result slot instead of being ejected")};
+                config.get(cat, "Furnace ejects smelting bonus", LevelUpAPI.furnaceEjection, "Disabling this will cause doubled furnace items to be added to the result slot instead of being ejected"),
+                config.get(cat, "Ore blocks harvested cannot be placed", oreNoPlace, "Disabling this will stop ore blocks from having a No Place tag added if not duplicated.")};
     }
 
     public void useServerProperties() {
@@ -268,6 +269,7 @@ public final class LevelUp {
         oreMiningXP = serverProperties[11].getBoolean();
         bonusFightingXP = serverProperties[12].getBoolean();
         LevelUpAPI.furnaceEjection = serverProperties[13].getBoolean();
+        oreNoPlace = serverProperties[14].getBoolean();
         if (serverProperties[10].getBoolean()) {
             List<Item> ingrTier1, ingrTier2, ingrTier3, ingrTier4;
             ingrTier1 = Arrays.asList(Items.STICK, Items.LEATHER, Item.getItemFromBlock(Blocks.STONE));

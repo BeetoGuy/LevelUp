@@ -265,6 +265,14 @@ public final class PlayerEventHandler {
                         }
                     }
                 }
+                else if (LevelUp.oreNoPlace) {
+                    for (ItemStack stack : event.getDrops()) {
+                        if (stack != null && state.getBlock() == Block.getBlockFromItem(stack.getItem())) {
+                            writeNoPlacing(stack);
+                            break;
+                        }
+                    }
+                }
             } else if (!event.isSilkTouching()) {
                 skill = getSkill(event.getHarvester(), 11);
                 if(state.getMaterial() == Material.GROUND) {
