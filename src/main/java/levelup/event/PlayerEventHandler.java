@@ -125,18 +125,19 @@ public final class PlayerEventHandler {
         ItemStack itemstack = event.getEntityPlayer().getHeldItemMainhand();
         IBlockState state = event.getState();
         Block block = state.getBlock();
+        float speed = event.getOriginalSpeed();
         if (itemstack != null)
             if (oldSpeedDigging && itemstack.getItem() instanceof ItemSpade) {
                 if (block instanceof BlockDirt || block instanceof BlockGravel) {
-                    event.setNewSpeed(event.getNewSpeed() * itemstack.getStrVsBlock(state) / 0.5F);
+                    event.setNewSpeed(speed * 0.5F);
                 }
             } else if (oldSpeedRedstone && itemstack.getItem() instanceof ItemPickaxe && block instanceof BlockRedstoneOre) {
-                event.setNewSpeed(event.getNewSpeed() * itemstack.getStrVsBlock(state) / 3F);
+                event.setNewSpeed(speed / 3F);
             }
-        if (block instanceof BlockStone || block == Blocks.COBBLESTONE || block == Blocks.OBSIDIAN || block instanceof BlockOre) {
-            event.setNewSpeed(event.getNewSpeed() + getSkill(event.getEntityPlayer(), 0) / 5 * 0.2F);
+        if (block instanceof BlockStone || block == Blocks.COBBLESTONE || block == Blocks.OBSIDIAN || block instanceof BlockOre || ores.contains(block)) {
+            event.setNewSpeed(speed + (getSkill(event.getEntityPlayer(), 0) / 5));
         } else if (state.getMaterial() == Material.WOOD) {
-            event.setNewSpeed(event.getNewSpeed() + getSkill(event.getEntityPlayer(), 3) / 5 * 0.2F);
+            event.setNewSpeed(speed + getSkill(event.getEntityPlayer(), 3) / 5);
         }
     }
 
