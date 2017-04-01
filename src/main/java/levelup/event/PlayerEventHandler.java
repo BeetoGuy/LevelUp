@@ -217,6 +217,11 @@ public final class PlayerEventHandler {
             ItemStack stack = event.getEntityPlayer().inventory.getCurrentItem();
             if(stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey("NoPlacing")) {
                 event.setUseItem(Event.Result.DENY);
+                return;
+            }
+            ItemStack offhand = event.getEntityPlayer().getHeldItemOffhand();
+            if (offhand != null && offhand.hasTagCompound() && offhand.getTagCompound().hasKey("NoPlacing")) {
+                event.setUseItem(Event.Result.DENY);
             }
         }
     }
