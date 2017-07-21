@@ -83,7 +83,7 @@ public final class LevelUpHUD extends Gui {
         String text = null;
         if (canShowSkills()) {
             int skillXP = PlayerExtendedProperties.from(LevelUp.proxy.getPlayer()).getSkillFromIndex("XP");
-            if (skillXP > 0)
+            if (skillXP > 0 && PlayerExtendedProperties.from(LevelUp.proxy.getPlayer()).getSkillPoints() < getTotalSkillPoints())
                 text = I18n.format("hud.skill.text1", skillXP);
         } else if (canSelectClass())
             text = I18n.format("hud.skill.select");
@@ -107,5 +107,9 @@ public final class LevelUpHUD extends Gui {
 
     public static boolean canShowSkills() {
         return PlayerExtendedProperties.from(LevelUp.proxy.getPlayer()).hasClass();
+    }
+
+    private static int getTotalSkillPoints() {
+        return ClassBonus.getMaxSkillPoints() * (ClassBonus.skillNames.length - 1);
     }
 }
